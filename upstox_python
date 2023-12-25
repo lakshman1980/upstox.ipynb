@@ -1,0 +1,64 @@
+import urllib.parse
+import pandas as pd
+import requests
+#step2 run the above code 
+####
+
+apiKey = '513de26d-bc67-493a-a0b'#your apikey
+secretKey = '6jxp'#your secretkey
+redirectUrl = 'https://www.google.com/'
+rurl = urllib.parse.quote(redirectUrl,safe="")
+rurl
+
+####
+#step3 run the above code 
+uri = f'https://api-v2.upstox.com/login/authorization/dialog?response_type=code&client_id={apiKey}&redirect_uri={rurl}'
+uri
+
+
+#####
+#step4 run the above code and click blow link it go to the google and genarete code then copy it and paste 
+### stpe4 code=''here ###
+
+url = 'https://api-v2.upstox.com/login/authorization/token'
+code = '8ULaq6'##your code
+headers = {
+    'accept': 'application/json',
+    'Api-Version': '2.0',
+    'Content-Type': 'application/x-www-form-urlencoded'
+}
+
+data = {
+    'code': code,
+    'client_id': apiKey,
+    'client_secret': secretKey,
+    'redirect_uri': redirectUrl,
+    'grant_type': 'authorization_code'
+}
+
+response = requests.post(url, headers=headers, data=data)
+json_response = response.json()
+
+json_response
+
+
+
+##step5
+access_token = json_response['access_token']
+access_token
+
+##step6
+url = 'https://api-v2.upstox.com/user/get-funds-and-margin'
+headers = {
+    'accept': 'application/json',
+    'Api-Version': '2.0',
+    'Authorization': f'Bearer {access_token}'
+}
+params = {
+    'segment': ''  #'COM'
+}
+
+
+response = requests.get(url, headers=headers, params=params)
+response.json()
+
