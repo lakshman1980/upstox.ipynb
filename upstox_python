@@ -4,7 +4,7 @@ import requests
 #step2 run the above code 
 ####
 
-apiKey = '513de26d-bc67-493a-a0b'#your apikey
+apiKey = '513de26-493a-a0b'#your apikey
 secretKey = '6jxp'#your secretkey
 redirectUrl = 'https://www.google.com/'
 rurl = urllib.parse.quote(redirectUrl,safe="")
